@@ -53,7 +53,7 @@ app.get("/generate", async (req, res) => {
     const imageUrl = response.data.photos[0].src.original
 
     const aiResponse = await openai.chat.completions.create({
-      model: "meta-llama/llama-3-8b-instruct:free",
+      model: "google/gemma-3n-e4b-it:free",
       messages: [
         { role: "user", content: `Generate a short creative caption for ${query}` }
       ]
