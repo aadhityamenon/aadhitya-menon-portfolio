@@ -11,7 +11,7 @@ function ApiDemo() {
       setLoading(true)
       setError(null)
 
-      const res = await fetch("https://your-backend.onrender.com/generate")
+      const res = await fetch("https://portfolio-guov.onrender.com/generate")
       if (!res.ok) throw new Error("Backend request failed")
       const data = await res.json()
 

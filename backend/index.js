@@ -23,6 +23,37 @@ const queries = [
 ]
 dotenv.config();
 
+if (!process.env.OPENROUTER_API_KEY && !process.env.OPENAI_API_KEY) {
+  console.warn("Warning: OPENROUTER_API_KEY or OPENAI_API_KEY is not set. AI calls will fail.");
+}
+
+// Helper that calls either OpenRouter or OpenAI chat completions endpoints using axios
+async function getCaption(query) {
+  const key = process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY;
+  if (!key) throw new Error('No AI API key configured (OPENROUTER_API_KEY or OPENAI_API_KEY).');
+
+  const isOpenRouter = !!process.env.OPENROUTER_API_KEY;
+  const url = isOpenRouter ? 'https://openrouter.ai/v1/chat/completions' : 'https://api.openai.com/v1/chat/completions';
+  const model = isOpenRouter ? 'google/gemma-3n-e4b-it:free' : 'gpt-4o-mini';
+
+  const body = {
+    model,
+    messages: [{ role: 'user', content: `Generate a short creative caption for ${query}` }],
+    max_tokens: 60
+  };
+
+  const headers = {
+    Authorization: `Bearer ${key}`,
+    'Content-Type': 'application/json'
+  };
+
+  const resp = await axios.post(url, body, { headers });
+
+  // Try a few common response shapes
+  const aiText = resp.data?.choices?.[0]?.message?.content || resp.data?.choices?.[0]?.text || resp.data?.output?.[0]?.content?.[0]?.text || '';
+  return aiText;
+}
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -41,25 +72,27 @@ app.get("/generate", async (req, res) => {
     const query = generateRandomQuery()
 
     const response = await axios.get(
-      "https://api.pexels.com/v1/search",
+      "https://pixabay.com/api/",
       {
-        params: { query, per_page: 1 },
-        headers: {
-          Authorization: process.env.PEXELS_API_KEY
+        params: {
+          key: process.env.PIXABAY_API_KEY,
+          q: query,
+          image_type: "photo",
+          per_page: 3
         }
       }
     )
 
-    const imageUrl = response.data.photos[0].src.original
+    console.log("PIXABAY RESPONSE:", response.data)
 
-    const aiResponse = await openai.chat.completions.create({
-      model: "google/gemma-3n-e4b-it:free",
-      messages: [
-        { role: "user", content: `Generate a short creative caption for ${query}` }
-      ]
-    })
+    const hits = response.data?.hits || []
 
-    const caption = response.choices[0].message.content
+    const imageUrl =
+      hits.length > 0
+        ? hits[0].largeImageURL
+        : "https://cdn.pixabay.com/photo/2016/11/29/03/53/adult-1867665_1280.jpg"
+
+    const caption = await getCaption(query)
 
     res.json({
       image: imageUrl,
@@ -67,10 +100,11 @@ app.get("/generate", async (req, res) => {
     })
 
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: "AI failed" })
+    console.error("FULL ERROR:", err.response?.data || err.message)
+    res.status(500).json({ error: "Failed", details: err.response?.data || err.message })
   }
 })
+
 
 
 const PORT = process.env.PORT || 3000;
