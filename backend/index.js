@@ -37,7 +37,7 @@ async function getCaption(query) {
       "Content-Type": "application/json"
   };
   const payload = {
-    "model": "openai/gpt-oss-120b:free",
+    "model": "google/gemma-3-27b-it:free",
     "messages": [
       {
         "role": "user",
@@ -53,6 +53,7 @@ async function getCaption(query) {
 
   const data = await response.json();
   console.log(data.choices[0].message.content);
+  console.log("RAW DATA:", JSON.stringify(data));
   return data.choices[0].message.content;
 }
 
@@ -66,10 +67,12 @@ function generateRandomQuery() {
 }
 
 app.get("/generate", async (req, res) => {
+  
   console.log("GENERATE ROUTE HIT");
   try {
+    console.log("PIXABAY KEY:", process.env.PIXABAY_API_KEY ? "set" : "MISSING")
     const query = generateRandomQuery()
-
+    console.log("QUERY:", query)
     const response = await axios.get(
       "https://pixabay.com/api/",
       {
@@ -97,8 +100,8 @@ app.get("/generate", async (req, res) => {
     })
 
   } catch (err) {
-    console.error("FULL ERROR:", err.response?.data || err.message)
-    res.status(500).json({ error: "Failed", details: err.response?.data || err.message })
+    console.error("FULL ERROR:", err.stack || err.message)
+    res.status(500).json({ error: "Failed", details: err.stack || err.message })
   }
 })
 
