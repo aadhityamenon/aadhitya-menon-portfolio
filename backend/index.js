@@ -41,7 +41,7 @@ async function getCaption(query) {
     "messages": [
       {
         "role": "user",
-        "content": `Write ONE word describing a photo of ${query}. Do not include lists, bullet points, explanations, or multiple options.`
+        "content": `Write ONE sentence describing a photo of ${query}. Do not include lists, bullet points, explanations, or multiple options.`
       }
 ]
 };
