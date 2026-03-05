@@ -37,7 +37,7 @@ async function getCaption(query) {
       "Content-Type": "application/json"
   };
   const payload = {
-    "model": "google/gemma-3-27b-it:free",
+    "model": "openai/gpt-oss-20b:free",
     "messages": [
       {
         "role": "user",
@@ -70,9 +70,7 @@ app.get("/generate", async (req, res) => {
   
   console.log("GENERATE ROUTE HIT");
   try {
-    console.log("PIXABAY KEY:", process.env.PIXABAY_API_KEY ? "set" : "MISSING")
     const query = generateRandomQuery()
-    console.log("QUERY:", query)
     const response = await axios.get(
       "https://pixabay.com/api/",
       {
