@@ -11,8 +11,7 @@ function ApiDemo() {
       setLoading(true)
       setError(null)
 
-      {/* const res = await fetch("https://portfolio-guov.onrender.com/generate") will re-add later*/}
-      const res = await fetch("http://localhost:3001/generate")
+      const res = await fetch("https://portfolio-guov.onrender.com/generate")
       if (!res.ok) throw new Error("Backend request failed")
       const data = await res.json()
 
@@ -25,29 +24,82 @@ function ApiDemo() {
     }
   }
 
-  // Fetch on load
   useEffect(() => {
     fetchImageAndCaption()
   }, [])
 
   return (
-    <div className="p-6 text-center">
-      <h1 className="text-3xl font-bold mb-4">Random AI Image + Caption</h1>
+    <main className="min-h-screen pt-14">
+      <div className="max-w-5xl mx-auto px-8 py-24">
 
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+        {/* Header */}
+        <div className="border-b border-stone-200 pb-8 mb-16">
+          <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
+            Experiment
+          </span>
+          <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-6xl mt-4">
+            AI Image Generator
+          </h1>
+          <p className="mt-4 text-stone-400 text-sm max-w-md">
+            Pulls a random image from Pixabay and generates a caption using an
+            AI language model.
+          </p>
+        </div>
 
-      {image && <img src={image} alt="Random" className="mx-auto mb-4" />}
-      {caption && <p className="text-xl italic">{caption}</p>}
+        {/* Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
-      <button
-        onClick={fetchImageAndCaption}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
-        Generate New
-      </button>
-    </div>
-  )
+          {/* Image */}
+          <div className="relative bg-stone-100 aspect-[4/3] overflow-hidden">
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 animate-pulse">
+                  Generating...
+                </span>
+              </div>
+            )}
+            {image && !loading && (
+              <img
+                src={image}
+                alt="Generated"
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
+
+          {/* Caption + controls */}
+          <div className="flex flex-col justify-between h-full gap-8">
+            <div>
+              {error && (
+                <p className="font-[family-name:var(--font-mono)] text-xs text-red-400 mb-4">
+                  Error: {error}
+                </p>
+              )}
+              {caption && !loading && (
+                <>
+                  <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 uppercase tracking-widest">
+                    Caption
+                  </span>
+                  <p className="font-[family-name:var(--font-display)] text-2xl mt-3 text-stone-800 italic leading-snug">
+                    "{caption}"
+                  </p>
+                </>
+              )}
+            </div>
+
+            <button
+              onClick={fetchImageAndCaption}
+              disabled={loading}
+              className="self-start px-6 py-3 border border-stone-900 text-sm text-stone-900 hover:bg-stone-900 hover:text-stone-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              {loading ? "Loading..." : "Generate New"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
 }
+
 
 export default ApiDemo
