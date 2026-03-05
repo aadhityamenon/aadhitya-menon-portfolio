@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv"
 import axios from "axios"
 
+
 dotenv.config();
 
 const queries = [
@@ -37,7 +38,7 @@ async function getCaption(query) {
       "Content-Type": "application/json"
   };
   const payload = {
-    "model": "openai/gpt-oss-20b:free",
+    "model": "arcee-ai/trinity-large-preview:free",
     "messages": [
       {
         "role": "user",
@@ -52,8 +53,7 @@ async function getCaption(query) {
   });
 
   const data = await response.json();
-  console.log(data.choices[0].message.content);
-  console.log("RAW DATA:", JSON.stringify(data));
+  if (!data.choices?.[0]) throw new Error(`OpenRouter: ${JSON.stringify(data)}`);
   return data.choices[0].message.content;
 }
 
@@ -68,7 +68,6 @@ function generateRandomQuery() {
 
 app.get("/generate", async (req, res) => {
   
-  console.log("GENERATE ROUTE HIT");
   try {
     const query = generateRandomQuery()
     const response = await axios.get(
@@ -82,7 +81,6 @@ app.get("/generate", async (req, res) => {
         }
       }
     )
-
     const hits = response.data?.hits || []
 
     const imageUrl =
