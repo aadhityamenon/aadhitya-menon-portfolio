@@ -17,7 +17,7 @@ export default function Navbar() {
           to="/"
           className="font-[family-name:var(--font-mono)] text-sm font-medium tracking-tight hover:opacity-60 transition-opacity"
         >
-          Home
+          Aadhitya Menon
         </Link>
         <ul className="flex items-center gap-8">
           {links.map(({ to, label }) => (

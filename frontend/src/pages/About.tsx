@@ -66,7 +66,7 @@ export default function About() {
               alt="Aadhitya Menon"
               className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
-            <div className="absolute inset-0 border border-stone-300 translate-x-3 translate-y-3 -z-10" />
+            <div className="absolute inset-0 border border-stone-300 translate-x-0 translate-y-0 -z-10" />
           </div>
         </div>
       </div>

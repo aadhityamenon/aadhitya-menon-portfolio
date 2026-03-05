@@ -3,26 +3,33 @@ const projects = [
     index: "01",
     title: "AI Misinformation Detector",
     description:
-      "Built an NLP-based model using logistic regression to detect misinformation with 92.3% accuracy. Designed the full data pipeline from preprocessing to evaluation.",
+      "Built an NLP-based model using logistic regression to detect misinformation with 92.3% accuracy. Designed the full data pipeline from preprocessing to evaluation. Used by 50+ high school students to enhance their research precision in various fields.",
     tech: ["Python", "scikit-learn", "NLP", "Logistic Regression"],
-    link: null,
+    link: "https://docs.google.com/document/d/1OAHky6uaVVYbb084GjncF5apxJc-1xMG/edit?usp=sharing&ouid=101104644244540031085&rtpof=true&sd=true",
   },
   {
     index: "02",
-    title: "Hey, Blue! — Auth & Data Systems",
+    title: "Hey, Blue! — Software Engineer Intern",
     description:
-      "Shipped production-ready authentication and data-handling features in React during an internship. Focused on reliability and clean API integration.",
-    tech: ["React", "TypeScript", "REST APIs"],
-    link: null,
+      "Used React Native to create crucial features such as user login, phone authentication, and news posts creation on an app, fostering police-community interactions. Developed workplace responsibility and time management to meet company deadlines.",
+    tech: ["React", "TypeScript", "Firebase"],
+    link: "https://heyblue.us/",
   },
   {
     index: "03",
-    title: "Personalized Learning AI",
+    title: "MentoraConnect (In Progress)",
     description:
-      "Led development of an AI-driven system for personalized knowledge retrieval and adaptive learning paths.",
-    tech: ["Python", "Machine Learning", "Data Pipelines"],
-    link: null,
+      "Developing a website that uses AI-based matchmaking to help tutors of various subjects connect to students.",
+    tech: ["Python", "Machine Learning", "TypeScript"],
+    link: "https://mentoraconnect.netlify.app/",
   },
+  {
+    index: "04",
+    title: "Pneumodetect",
+    description: "Led a team of 6 students in creating a pneumonia detector through the use of various Python libraries. Coordinated efforts and organized deadlines for teammates. Implemented coding solutions utilizing convolutional neural networks and conducted targeted data analysis for findings. Presented data in confusion matrices to show our detector’s success.",
+    tech: ["Python", "Matplotlib", "Numpy", "Pandas", "Seaborn", "CV2", "Tensorflow"],
+    link: "https://pneumodetector.streamlit.app/",
+  }
 ];
 
 export default function Projects() {
