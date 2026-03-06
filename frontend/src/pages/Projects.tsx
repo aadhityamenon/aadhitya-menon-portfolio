@@ -101,7 +101,6 @@ export default function Projects() {
           {/* Project list */}
           <div className="divide-y divide-stone-200">
             {projects.map((project) => {
-              const isSelected = selected?.index === project.index;
 
               const row = (
                 <div
