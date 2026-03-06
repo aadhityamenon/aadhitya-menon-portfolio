@@ -3,6 +3,7 @@ import heyblue from "../assets/heyblue.png";
 import mentoraconnect from "../assets/mentora.png";
 import pneumodetect from "../assets/pneumodetect.png";
 import ElectricBorder from '../components/ElectricBorder';
+import LiquidEther from '../components/LiquidEther';
 
 type Project = {
   index: string;
@@ -63,150 +64,173 @@ export default function Projects() {
   const [hovered, setHovered] = useState<string | null>(null);
   return (
     <main className="min-h-screen pt-14">
-      <div className="max-w-5xl mx-auto px-8 py-24">
-
-        {/* Header */}
-        <div className="border-b border-stone-200 pb-8 mb-16">
-          <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
-            Work
-          </span>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-6xl mt-4">
-            Projects
-          </h1>
+      <div className="relative w-full min-h-screen overflow-hidden">
+        <div className="fixed inset-0 -z-10">
+          <LiquidEther
+            colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]}
+            mouseForce={20}
+            cursorSize={100}
+            isViscous
+            viscous={30}
+            iterationsViscous={32}
+            iterationsPoisson={32}
+            resolution={0.5}
+            isBounce={false}
+            autoDemo
+            autoSpeed={0.5}
+            autoIntensity={2.2}
+            takeoverDuration={0.25}
+            autoResumeDelay={3000}
+            autoRampDuration={0.6}
+            color0="#5227FF"
+            color1="#FF9FFC"
+            color2="#B19EEF"
+          />
         </div>
-
-        {/* Project list */}
-        <div className="divide-y divide-stone-200">
-          {projects.map((project) => {
-            const isSelected = selected?.index === project.index;
-
-            const row = (
-              <div
-                key={project.index}
-                onClick={() => setSelected(project)}
-                onMouseEnter={() => setHovered(project.index)}
-                onMouseLeave={() => setHovered(null)}
-                className="py-12 grid grid-cols-1 md:grid-cols-[80px_1fr_1fr] gap-6 group cursor-pointer hover:bg-stone-50 -mx-4 px-4 transition-colors"
-              >
-                <span className="font-[family-name:var(--font-mono)] text-xs text-stone-300 pt-1">
-                  {project.index}
-                </span>
-
-                <div>
-                  <h2 className="text-xl font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
-                    {project.title}
-                  </h2>
-                  <p className="mt-3 text-stone-500 text-sm leading-relaxed max-w-sm">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="flex flex-col justify-between">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="mt-4 text-xs text-stone-400 group-hover:text-stone-600 transition-colors">
-                    View details →
-                  </span>
-                </div>
-              </div>
-            );
-
-            const isHighlighted = hovered === project.index;
-
-            return isHighlighted ? (
-              <ElectricBorder
-                key={project.index}
-                color="#7df9ff"
-                speed={1}
-                chaos={0.12}
-                thickness={2}
-                style={{ borderRadius: 8 }}
-              >
-                {row}
-              </ElectricBorder>
-            ) : row;
-          })}
+        <div className="relative z-10 max-w-5xl mx-auto px-8 py-24">
+          {/* Header */}
+          <div className="border-b border-stone-200 pb-8 mb-16">
+            <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
+              Work
+            </span>
+            <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-6xl mt-4">
+              Projects
+            </h1>
           </div>
-        </div>
 
-      {/* Modal */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-6"
-          onClick={() => setSelected(null)}
-        >
-          <div
-            className="bg-white max-w-2xl w-full max-h-[85vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal image */}
-            {selected.image && (
-              <img
-                src={selected.image}
-                alt={selected.title}
-                className="w-full h-56 object-cover object-top"
-              />
-            )}
+          {/* Project list */}
+          <div className="divide-y divide-stone-200">
+            {projects.map((project) => {
+              const isSelected = selected?.index === project.index;
 
-            <div className="p-8">
-              {/* Modal header */}
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 uppercase tracking-widest">
-                    {selected.index}
+              const row = (
+                <div
+                  key={project.index}
+                  onClick={() => setSelected(project)}
+                  onMouseEnter={() => setHovered(project.index)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="py-12 grid grid-cols-1 md:grid-cols-[80px_1fr_1fr] gap-6 group cursor-pointer hover:bg-stone-50 -mx-4 px-4 transition-colors"
+                >
+                  <span className="font-[family-name:var(--font-mono)] text-xs text-stone-300 pt-1">
+                    {project.index}
                   </span>
-                  <h2 className="font-[family-name:var(--font-display)] text-3xl mt-1">
-                    {selected.title}
-                  </h2>
+
+                  <div>
+                    <h2 className="text-xl font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
+                      {project.title}
+                    </h2>
+                    <p className="mt-3 text-stone-500 text-sm leading-relaxed max-w-sm">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col justify-between">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="mt-4 text-xs text-stone-400 group-hover:text-stone-600 transition-colors">
+                      View details →
+                    </span>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setSelected(null)}
-                  className="font-[family-name:var(--font-mono)] text-xs text-stone-400 hover:text-stone-900 transition-colors mt-1"
+              );
+
+              const isHighlighted = hovered === project.index;
+
+              return isHighlighted ? (
+                <ElectricBorder
+                  key={project.index}
+                  color="#7df9ff"
+                  speed={1}
+                  chaos={0.12}
+                  thickness={2}
+                  style={{ borderRadius: 8 }}
                 >
-                  ✕ Close
-                </button>
-              </div>
-
-              {/* Detail */}
-              <p className="text-stone-600 leading-relaxed text-sm">
-                {selected.detail}
-              </p>
-
-              {/* Tech */}
-              <div className="mt-6 flex flex-wrap gap-2">
-                {selected.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              {/* Link */}
-              {selected.link && (
-                <a
-                  href={selected.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-block text-xs text-stone-400 underline underline-offset-4 hover:text-stone-900 transition-colors"
-                >
-                  View project →
-                </a>
-              )}
+                  {row}
+                </ElectricBorder>
+              ) : row;
+            })}
             </div>
           </div>
-        </div>
-      )}
+
+        {/* Modal */}
+        {selected && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-6"
+            onClick={() => setSelected(null)}
+          >
+            <div
+              className="bg-white max-w-2xl w-full max-h-[85vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal image */}
+              {selected.image && (
+                <img
+                  src={selected.image}
+                  alt={selected.title}
+                  className="w-full h-56 object-cover object-top"
+                />
+              )}
+
+              <div className="p-8">
+                {/* Modal header */}
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 uppercase tracking-widest">
+                      {selected.index}
+                    </span>
+                    <h2 className="font-[family-name:var(--font-display)] text-3xl mt-1">
+                      {selected.title}
+                    </h2>
+                  </div>
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="font-[family-name:var(--font-mono)] text-xs text-stone-400 hover:text-stone-900 transition-colors mt-1"
+                  >
+                    ✕ Close
+                  </button>
+                </div>
+
+                {/* Detail */}
+                <p className="text-stone-600 leading-relaxed text-sm">
+                  {selected.detail}
+                </p>
+
+                {/* Tech */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {selected.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Link */}
+                {selected.link && (
+                  <a
+                    href={selected.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-block text-xs text-stone-400 underline underline-offset-4 hover:text-stone-900 transition-colors"
+                  >
+                    View project →
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
