@@ -1,5 +1,5 @@
 import profile from "../assets/profile.jpg";
-import Galaxy from '../components/Galaxy';
+import Galaxy from "../components/Galaxy";
 
 const facts = [
   { label: "University", value: "UC Irvine" },
