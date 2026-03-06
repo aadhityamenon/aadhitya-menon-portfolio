@@ -3,9 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv"
 import axios from "axios"
 
-
+//configuration of api keys
 dotenv.config();
 
+// Image queries
 const queries = [
     "sheep", "suggestion", "woman", "cellar", "trail", "smell", "year",
     "education", "zebra", "chance", "bat", "spot", "friction", "hydrant",
@@ -31,12 +32,14 @@ async function getCaption(query) {
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error('No AI API key configured (REACT_APP_OPENROUTER_API_KEY).');
 
+  // creation of api url for openrouter with api key provided 
   const isOpenRouter = !!process.env.OPENROUTER_API_KEY;
   const url = "https://openrouter.ai/api/v1/chat/completions";
   const headers = {
       "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "Content-Type": "application/json"
   };
+  // choice of model and creation of query posed to the AI
   const payload = {
     "model": "arcee-ai/trinity-large-preview:free",
     "messages": [
@@ -46,6 +49,7 @@ async function getCaption(query) {
       }
 ]
 };
+  // fetches API response
   const response = await fetch(url, {
       method: "POST",
       headers,
@@ -61,13 +65,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+// Chooses a random query to give the image API
 function generateRandomQuery() {
   return queries[Math.floor(Math.random() * queries.length)]
 }
 
 app.get("/generate", async (req, res) => {
   
+  // creation of api url for pixabay with api key provided
   try {
     const query = generateRandomQuery()
     const response = await axios.get(
@@ -102,7 +107,7 @@ app.get("/generate", async (req, res) => {
 })
 
 
-
+// Port configuration
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
