@@ -1,6 +1,8 @@
 import {useEffect, useRef, useState} from "react"
 import {Link} from "react-router-dom";
 import introVideo from "../assets/aadhityaportfoliointro.mp4";
+import Antigravity from '../components/Antigravity';
+
 
 export default function Home() {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -42,7 +44,27 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="relative min-h-screen">
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <Antigravity
+          count={300}
+          magnetRadius={6}
+          ringRadius={7}
+          waveSpeed={0.4}
+          waveAmplitude={1}
+          particleSize={1.5}
+          lerpSpeed={0.05}
+          color="#5227FF"
+          autoAnimate
+          particleVariance={1}
+          rotationSpeed={0}
+          depthFactor={1}
+          pulseSpeed={3}
+          particleShape="capsule"
+          fieldStrength={10}
+        />
+      </div>
+      <div className="fixed inset-0 -z-5 bg-white/60 backdrop-blur-[1px]" />
       {showIntro && (
         <div
           className="fixed inset-0 z-50 bg-black flex items-center justify-center"
@@ -114,6 +136,6 @@ export default function Home() {
         </div>
       </div>
     </main>
-    </>
+    </div>
   );
 }

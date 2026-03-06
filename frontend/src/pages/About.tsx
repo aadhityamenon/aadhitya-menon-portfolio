@@ -7,6 +7,25 @@ const facts = [
   { label: "Interests", value: "Tennis, Soccer, Mythology" },
 ];
 
+const skillCategories = [
+  {
+    label: "Languages",
+    skills: ["Python", "Java", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
+  },
+  {
+    label: "Frameworks & Tools",
+    skills: ["React.js", "Vite", "Express.js", "React Native", "GitHub", "VS Code", "Render", "Netlify"],
+  },
+  {
+    label: "Data & ML",
+    skills: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "scikit-learn"],
+  },
+  {
+    label: "Soft Skills",
+    skills: ["Leadership", "Problem-solving", "Communication", "Critical Thinking", "Time Management"],
+  },
+];
+
 export default function About() {
   return (
     <main className="min-h-screen pt-14">
@@ -67,6 +86,31 @@ export default function About() {
               className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 border border-stone-300 translate-x-0 translate-y-0 -z-10" />
+          </div>
+        </div>
+        {/* Skills */}
+        <div className="mt-24 pt-16 border-t border-stone-200">
+          <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
+            Skills
+          </span>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+            {skillCategories.map(({ label, skills }) => (
+              <div key={label}>
+                <p className="font-[family-name:var(--font-mono)] text-xs text-stone-400 uppercase tracking-widest mb-3">
+                  {label}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {skills.map((s) => (
+                    <span
+                      key={s}
+                      className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-800 transition-colors"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
