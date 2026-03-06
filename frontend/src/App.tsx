@@ -7,6 +7,7 @@ import Projects from "./pages/Projects";
 import ApiDemo from "./pages/ApiDemo";
 import Footer from "./components/Footer"
 
+
 function App() {
   return (
     <>
