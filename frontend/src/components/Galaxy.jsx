@@ -2,6 +2,8 @@ import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { useEffect, useRef } from 'react';
 import './Galaxy.css';
 
+// Imported code for a galaxy background
+
 const vertexShader = `
 attribute vec2 uv;
 attribute vec2 position;

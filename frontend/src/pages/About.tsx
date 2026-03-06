@@ -1,6 +1,7 @@
 import profile from "../assets/profile.jpg";
 import Galaxy from "../components/Galaxy";
 
+//facts about me
 const facts = [
   { label: "University", value: "UC Irvine" },
   { label: "Major", value: "Computer Science" },
@@ -8,6 +9,7 @@ const facts = [
   { label: "Interests", value: "Tennis, Soccer, Mythology" },
 ];
 
+// Skill categories
 const skillCategories = [
   {
     label: "Languages",
@@ -32,6 +34,7 @@ export default function About() {
     <main className="min-h-screen pt-14">
       <div className="relative w-full min-h-screen overflow-hidden">
         <div className="fixed inset-0 -z-10 bg-black">
+          {/* Galaxy background with custom settings for interactivity and appearance */ }
           <Galaxy 
             mouseRepulsion
             mouseInteraction
@@ -47,6 +50,7 @@ export default function About() {
             speed={1}
           />
         </div>
+        {/* Title area */}
         <div className="relative z-10 max-w-5xl mx-auto px-8 py-24">
           <div className="border-b border-stone-200 pb-8 mb-16">
             <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
@@ -58,7 +62,7 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-
+            {/* Paragraphs about me */}
             <div className="space-y-6 text-stone-600 leading-relaxed">
               <p>
                 I'm a CS freshman at UC Irvine from Pleasanton, California. I'm
@@ -82,6 +86,7 @@ export default function About() {
                 finding good food wherever I end up.
               </p>
 
+              {/* Display of facts */}
               <div className="pt-6 grid grid-cols-2 gap-4 border-t border-stone-200">
                 {facts.map(({ label, value }) => (
                   <div key={label}>
@@ -95,7 +100,7 @@ export default function About() {
                 ))}
               </div>
             </div>
-
+            {/* Profile picture with grayscale effect and border */ }
             <div className="relative">
               <img
                 src={profile}
@@ -105,6 +110,7 @@ export default function About() {
               <div className="absolute inset-0 border border-stone-300 translate-x-0 translate-y-0 -z-10" />
             </div>
           </div>
+          
           {/* Skills */}
           <div className="mt-24 pt-16 border-t border-stone-200">
             <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">

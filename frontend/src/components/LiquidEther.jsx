@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import './LiquidEther.css';
 
+// Imported code for a liquid ether background
+
 export default function LiquidEther({
   mouseForce = 20,
   cursorSize = 100,

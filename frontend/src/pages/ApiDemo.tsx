@@ -11,10 +11,10 @@ function ApiDemo() {
       setLoading(true)
       setError(null)
 
-      const res = await fetch("https://portfolio-guov.onrender.com/generate")
+      const res = await fetch("https://portfolio-guov.onrender.com/generate") // connect to backend
       if (!res.ok) throw new Error("Backend request failed")
       const data = await res.json()
-
+      // Sets the image and caption
       setImage(data.image)
       setCaption(data.caption)
     } catch (err: any) {
@@ -46,7 +46,6 @@ function ApiDemo() {
           </p>
         </div>
 
-        {/* Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
           {/* Image */}
@@ -87,6 +86,7 @@ function ApiDemo() {
               )}
             </div>
 
+            {/* Generate button */}
             <button
               onClick={fetchImageAndCaption}
               disabled={loading}

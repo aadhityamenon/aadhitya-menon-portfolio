@@ -1,3 +1,6 @@
+// Code for the footer component
+
+// Footer links
 const links = [
   {
     label: "GitHub",
@@ -17,11 +20,13 @@ export default function Footer() {
   return (
     <footer className="border-t border-stone-200 mt-24">
       <div className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
+        {/* Footer copyright */}
         <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400">
           © {new Date().getFullYear()} Aadhitya Menon
         </span>
         <ul className="flex items-center gap-6">
           {links.map(({ label, href }) => (
+            //list of links
             <li key={label}>
               <a
                 href={href}

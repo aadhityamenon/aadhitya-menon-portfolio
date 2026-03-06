@@ -20,6 +20,7 @@ export default function Home() {
       .catch(err => console.error("Error:", err))
   }, [])
 
+  // Edits video playback speed at start and allows for the fade to the website at the end
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -30,6 +31,7 @@ export default function Home() {
       video.playbackRate = 16;
     }, 1000);
   
+    // Makes sure video only loads when a new tab is opened
     const handleEnded = () => {
       sessionStorage.setItem("introSeen", "true");
       setFadingOut(true);
@@ -46,6 +48,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen">
       <div className="fixed inset-0 -z-10 pointer-events-none">
+        {/* Antigravity effect */}
         <Antigravity
           count={300}
           magnetRadius={6}
@@ -65,6 +68,7 @@ export default function Home() {
         />
       </div>
       <div className="fixed inset-0 -z-5 bg-white/60 backdrop-blur-[1px]" />
+      {/*Display of video */}
       {showIntro && (
         <div
           className="fixed inset-0 z-50 bg-black flex items-center justify-center"
@@ -77,6 +81,7 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
           />
+          {/* Skip button for the intro video */}
           <button
             onClick={() => {
               sessionStorage.setItem("introSeen", "true");
@@ -89,9 +94,11 @@ export default function Home() {
           </button>
         </div>
       )}
+    
     <main className="min-h-screen pt-14 flex items-center">
       <div className="max-w-5xl mx-auto px-8 py-32 w-full">
         <div className="animate-fade-up-delay-1">
+          {/* Title Page Display */}
           <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
             Software Engineer
           </span>
@@ -107,12 +114,14 @@ export default function Home() {
         </p>
 
         <div className="mt-12 flex items-center gap-6 animate-fade-up-delay-4">
+          {/* Link to projects page */}
           <Link
             to="/projects"
             className="px-6 py-3 bg-stone-900 text-stone-50 text-sm tracking-wide hover:bg-stone-700 transition-colors"
           >
             View Projects
           </Link>
+          {/* Link to about page */}
           <Link
             to="/about"
             className="text-sm text-stone-400 hover:text-stone-900 transition-colors underline underline-offset-4"
@@ -122,6 +131,7 @@ export default function Home() {
         </div>
 
         <div className="mt-32 pt-8 border-t border-stone-200 flex gap-8 animate-fade-up-delay-4">
+          {/* Information section */}
           {[
             { label: "Focus", value: "AI, Bioinformatics, Statistics" },
             { label: "Based in", value: "Irvine, CA" },

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react';
 import './ElectricBorder.css';
 
+// Imported code for an electric border
+
 const ElectricBorder = ({
   children,
   color = '#5227FF',

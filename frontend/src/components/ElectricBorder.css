@@ -1,3 +1,5 @@
+/* Imported css for electric border */
+
 .electric-border {
   --electric-light-color: oklch(from var(--electric-border-color) l c h);
   position: relative;

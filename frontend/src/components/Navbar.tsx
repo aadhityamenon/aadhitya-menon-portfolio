@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
+// Navigation links
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
@@ -13,13 +14,15 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fafaf9]/90 backdrop-blur-sm border-b border-stone-200">
       <div className="max-w-5xl mx-auto px-8 h-14 flex items-center justify-between">
+        {/* Logo / name on the left */}
         <Link
           to="/"
           className="font-[family-name:var(--font-mono)] text-sm font-medium tracking-tight hover:opacity-60 transition-opacity"
         >
           Aadhitya Menon
-        </Link>
+        </Link> 
         <ul className="flex items-center gap-8">
+          {/* Navigation links display */}
           {links.map(({ to, label }) => (
             <li key={to}>
               <Link

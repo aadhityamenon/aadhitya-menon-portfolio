@@ -5,6 +5,7 @@ import pneumodetect from "../assets/pneumodetect.png";
 import ElectricBorder from '../components/ElectricBorder';
 import LiquidEther from '../components/LiquidEther';
 
+/* Project type */
 type Project = {
   index: string;
   title: string;
@@ -15,6 +16,7 @@ type Project = {
   link?: string;
 }
 
+{/* Information about each project */}
 const projects: Project[] = [
   {
     index: "01",
@@ -60,12 +62,13 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Project | null>(null); 
+  const [hovered, setHovered] = useState<string | null>(null); // For electric border effect
   return (
     <main className="min-h-screen pt-14">
       <div className="relative w-full min-h-screen overflow-hidden">
         <div className="fixed inset-0 -z-10">
+          {/* Liquid ether effect */}
           <LiquidEther
             colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]}
             mouseForce={20}
@@ -105,11 +108,12 @@ export default function Projects() {
               const row = (
                 <div
                   key={project.index}
-                  onClick={() => setSelected(project)}
-                  onMouseEnter={() => setHovered(project.index)}
-                  onMouseLeave={() => setHovered(null)}
+                  onClick={() => setSelected(project)} // Enables the project popup on click
+                  onMouseEnter={() => setHovered(project.index)} // Creates electric border effect on hover
+                  onMouseLeave={() => setHovered(null)} // Removes electric border when mouse moves away
                   className="py-12 grid grid-cols-1 md:grid-cols-[80px_1fr_1fr] gap-6 group cursor-pointer hover:bg-stone-50 -mx-4 px-4 transition-colors"
                 >
+                  {/* Display of projects without popup */}
                   <span className="font-[family-name:var(--font-mono)] text-xs text-stone-300 pt-1">
                     {project.index}
                   </span>
@@ -143,6 +147,7 @@ export default function Projects() {
 
               const isHighlighted = hovered === project.index;
 
+              // Creates electric border effect
               return isHighlighted ? (
                 <ElectricBorder
                   key={project.index}
@@ -159,7 +164,7 @@ export default function Projects() {
             </div>
           </div>
 
-        {/* Modal */}
+        {/* Modal/popup effect */}
         {selected && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-6"
