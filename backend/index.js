@@ -6,7 +6,7 @@ import axios from "axios"
 //configuration of api keys
 dotenv.config();
 
-// Image queries
+// Image queries list
 const queries = [
     "sheep", "suggestion", "woman", "cellar", "trail", "smell", "year",
     "education", "zebra", "chance", "bat", "spot", "friction", "hydrant",
