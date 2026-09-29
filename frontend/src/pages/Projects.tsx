@@ -15,71 +15,119 @@ type Project = {
   link?: string;
 }
 
-{/* Information about each project */}
-const projects: Project[] = [
+{/* Work & research experience */}
+const work: Project[] = [
   {
     index: "01",
-    title: "AI Misinformation Detector",
-    description: "NLP-based model to detect misinformation with 92.3% accuracy.",
+    title: "Aquila Clouds — Software Engineer Intern",
+    description: "Rewrote a legacy Java billing platform in Python, across AWS and GCP.",
     detail:
-      "Built an NLP-based model using logistic regression to detect misinformation with 92.3% accuracy. Designed the full data pipeline from preprocessing to evaluation. Used by 50+ high school students to enhance their research precision in various fields.",
-    tech: ["Python", "scikit-learn", "NLP", "Logistic Regression"],
-    image: undefined,
-    link: "https://docs.google.com/document/d/1OAHky6uaVVYbb084GjncF5apxJc-1xMG/edit?usp=sharing&ouid=101104644244540031085&rtpof=true&sd=true",
+      "Rewrote Aquila Clouds' AWS and GCP billing, performance-metrics, and inventory collectors from a legacy Java system into Python, unifying them under a shared PostgreSQL data model. Tracked down a cross-account AWS auth failure and an IAM permissions gap, and fixed two database bugs that were quietly leaving fields null and inventory tables empty. Traced three confusing production errors in the old Java platform back to their root causes — bad database views, a schema mismatch, and a swallowed exception — and validated the new pipeline against it end-to-end.",
+    tech: ["Python", "AWS", "GCP", "PostgreSQL"],
   },
-
   {
     index: "02",
-    title: "Hey, Blue! — Software Engineer Intern",
-    description: "App to foster community-police interaction.",
+    title: "Shah Lab — Undergraduate AI/ML Researcher",
+    description: "Studying reinforcement learning approaches to sepsis treatment.",
     detail:
-      "Used React Native to create crucial features such as user login, phone authentication, and news posts creation on an app, fostering police-community interactions. Developed workplace responsibility and time management to meet company deadlines.",
-    tech: ["React", "TypeScript", "Firebase"],
-    image: heyblue,
-    link: "https://heyblue.us/",
+      "Reading through recent clinical ML literature on deep reinforcement learning for sepsis treatment to understand where current approaches fall short. Working on independent research questions around off-policy learning, looking for ways to help models adapt better when trained on external clinical policies.",
+    tech: ["PyTorch", "Pandas", "TensorFlow", "Reinforcement Learning"],
   },
   {
     index: "03",
-    title: "MentoraConnect (In Progress)",
-    description: "AI-based tutor platform for tutors and students.",
+    title: "Beckman Laser Institute — Undergraduate AI/ML Researcher",
+    description: "Building an ML pipeline to validate object-matching in medical imaging.",
     detail:
-      "Developing a website that uses AI-based matchmaking to help tutors of various subjects connect to students.",
+      "Building a machine learning pipeline that pairs a Random Forest pixel classifier with morphological filters to validate spatial overlap and object matching. Rewrote the evaluation step as a vectorized 2D label histogram intersection instead of nested loops, cutting processing time across thousands of high-resolution images. Also built an automated Seaborn violin-plot workflow so the team can see how model performance is actually distributed, not just averaged.",
+    tech: ["Python", "scikit-learn", "NumPy", "Seaborn"],
+  },
+  {
+    index: "04",
+    title: "Inspirit AI — AI/ML Research Assistant",
+    description: "NLP model that flags misinformation with 92.3% accuracy.",
+    detail:
+      "Built an NLP model using logistic regression that detects misinformation with 92.3% accuracy. Designed an automated scoring system that cut down manual verification work for 20+ student researchers, and documented the model's performance and confusion matrix results so the approach could be reused in classroom research projects.",
+    tech: ["Python", "scikit-learn", "NLP", "Logistic Regression"],
+    link: "https://docs.google.com/document/d/1OAHky6uaVVYbb084GjncF5apxJc-1xMG/edit?usp=sharing&ouid=101104644244540031085&rtpof=true&sd=true",
+  },
+  {
+    index: "05",
+    title: "Hey, Blue! — Software Engineer Intern",
+    description: "Shipped auth and posting features for a community-police app.",
+    detail:
+      "Built user authentication, phone verification, and post-creation features for Hey, Blue!'s React Native app, which helps communities and local police interact more directly.",
+    tech: ["React Native", "JavaScript"],
+    image: heyblue,
+    link: "https://heyblue.us/",
+  },
+];
+
+{/* Personal / team projects */}
+const projects: Project[] = [
+  {
+    index: "01",
+    title: "TutorConnect",
+    description: "AI-matchmaking platform pairing students with tutors.",
+    detail:
+      "A platform that uses AI matchmaking to connect students with tutors based on subject expertise and learning style, aiming to make quality tutoring more accessible.",
     tech: ["Python", "Machine Learning", "TypeScript"],
     image: mentoraconnect,
     link: "https://mentoraconnect.netlify.app/",
   },
-
   {
-    index: "04",
-    title: "Pneumodetect",
-    description: "Pneumonia detector using CNNs and data analysis.",
-    detail: "Led a team of 6 students in creating a pneumonia detector through the use of various Python libraries. Coordinated efforts and organized deadlines for teammates. Implemented coding solutions utilizing convolutional neural networks and conducted targeted data analysis for findings. Presented data in confusion matrices to show our detector’s success.",
-    tech: ["Python", "Matplotlib", "Numpy", "Pandas", "Seaborn", "CV2", "Tensorflow"],
+    index: "02",
+    title: "Pneumodetector",
+    description: "CNN-based pneumonia detector built from chest X-rays.",
+    detail:
+      "Led a team building a convolutional neural network that detects pneumonia from chest X-rays. Handled the data analysis and evaluation myself, using confusion matrices to show how well the model actually performed.",
+    tech: ["Python", "Matplotlib", "NumPy", "Pandas", "Seaborn", "CV2", "TensorFlow"],
     image: pneumodetect,
     link: "https://pneumodetector.streamlit.app/",
-  }
+  },
 ];
 
 export default function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null); 
+  const [tab, setTab] = useState<"work" | "projects">("work");
+  const [selected, setSelected] = useState<Project | null>(null);
   const [hovered, setHovered] = useState<string | null>(null); // For electric border effect
+  const items = tab === "work" ? work : projects;
   return (
-    <main className="min-h-screen pt-14">
-      <div className="relative w-full min-h-screen overflow-hidden">
+    <main className="flex-1 pt-14">
+      <div className="relative w-full overflow-hidden">
         <div className="relative z-10 max-w-5xl mx-auto px-8 py-24">
           {/* Header */}
-          <div className="border-b border-stone-200 pb-8 mb-16">
+          <div className="border-b border-stone-200 pb-8 mb-10">
             <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
-              Work
+              Selected
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-6xl mt-4">
-              Projects
+              Work &amp; Projects
             </h1>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex items-center gap-8 mb-16">
+            <button
+              onClick={() => setTab("work")}
+              className={`text-sm tracking-wide transition-colors ${
+                tab === "work" ? "text-stone-900 font-medium" : "text-stone-400 hover:text-stone-900"
+              }`}
+            >
+              Work &amp; Research
+            </button>
+            <button
+              onClick={() => setTab("projects")}
+              className={`text-sm tracking-wide transition-colors ${
+                tab === "projects" ? "text-stone-900 font-medium" : "text-stone-400 hover:text-stone-900"
+              }`}
+            >
+              Projects
+            </button>
           </div>
 
           {/* Project list */}
           <div className="divide-y divide-stone-200">
-            {projects.map((project) => {
+            {items.map((project) => {
 
               const row = (
                 <div

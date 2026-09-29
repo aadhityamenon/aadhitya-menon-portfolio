@@ -31,8 +31,8 @@ const skillCategories = [
 
 export default function About() {
   return (
-    <main className="min-h-screen pt-14">
-      <div className="relative w-full min-h-screen overflow-hidden">
+    <main className="flex-1 pt-14">
+      <div className="relative w-full overflow-hidden">
         <div className="fixed inset-0 -z-10 bg-black">
           {/* Galaxy background with custom settings for interactivity and appearance */ }
           <Galaxy 
@@ -63,7 +63,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             {/* Paragraphs about me */}
-            <div className="space-y-6 text-stone-600 leading-relaxed">
+            <div className="space-y-6 text-stone-300 leading-relaxed">
               <p>
                 I'm a CS freshman at UC Irvine from Pleasanton, California. I'm
                 drawn to problems at the intersection of systems reliability, data
@@ -93,7 +93,7 @@ export default function About() {
                     <p className="font-[family-name:var(--font-mono)] text-xs text-stone-400 uppercase tracking-widest">
                       {label}
                     </p>
-                    <p className="mt-1 text-stone-800 text-sm font-medium">
+                    <p className="mt-1 text-stone-100 text-sm font-medium">
                       {value}
                     </p>
                   </div>
@@ -126,7 +126,7 @@ export default function About() {
                     {skills.map((s) => (
                       <span
                         key={s}
-                        className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-800 transition-colors"
+                        className="font-[family-name:var(--font-mono)] text-xs px-2 py-1 border border-stone-200 text-stone-400 hover:border-stone-100 hover:text-white transition-colors"
                       >
                         {s}
                       </span>

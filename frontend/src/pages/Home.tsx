@@ -5,7 +5,7 @@ import Antigravity from '../components/Antigravity';
 export default function Home() {
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative flex-1 flex flex-col">
       <div className="fixed inset-0 -z-10 pointer-events-none">
         {/* Antigravity effect */}
         <Antigravity
@@ -27,11 +27,11 @@ export default function Home() {
       </div>
       <div className="fixed inset-0 -z-5 bg-white/60 backdrop-blur-[1px]" />
 
-    <main className="min-h-screen pt-14 flex items-center">
+    <main className="flex-1 pt-14 flex items-center">
       <div className="max-w-5xl mx-auto px-8 py-32 w-full">
         <div className="animate-fade-up-delay-1">
           {/* Title Page Display */}
-          <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400 tracking-widest uppercase">
+          <span className="font-[family-name:var(--font-mono)] text-4xl text-stone-400 tracking-widest uppercase">
             Software Engineer
           </span>
         </div>
