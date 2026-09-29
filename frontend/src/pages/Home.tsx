@@ -1,49 +1,8 @@
-import {useEffect, useRef, useState} from "react"
 import {Link} from "react-router-dom";
-import introVideo from "../assets/aadhityaportfoliointro.mp4";
 import Antigravity from '../components/Antigravity';
 
 
 export default function Home() {
-  const API_URL = import.meta.env.VITE_API_URL;
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [fadingOut, setFadingOut] = useState(false);
-  const [showIntro, setShowIntro] = useState(() => {
-    const seen = sessionStorage.getItem("introSeen");
-    return !seen;
-  });
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => console.log("Backend says:", data))
-      .catch(err => console.error("Error:", err))
-  }, [])
-
-  // Edits video playback speed at start and allows for the fade to the website at the end
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.playbackRate = 0.5;
-    video.play();
-
-    const speedUp = setTimeout(() => {
-      video.playbackRate = 16;
-    }, 1000);
-  
-    // Makes sure video only loads when a new tab is opened
-    const handleEnded = () => {
-      sessionStorage.setItem("introSeen", "true");
-      setFadingOut(true);
-      setTimeout(() => setShowIntro(false), 2000);
-    };
-
-    video.addEventListener("ended", handleEnded);
-    return () => {
-      clearTimeout(speedUp);
-      video.removeEventListener("ended", handleEnded);
-    };
-  }, []);
 
   return (
     <div className="relative min-h-screen">
@@ -61,40 +20,13 @@ export default function Home() {
           autoAnimate
           particleVariance={1}
           rotationSpeed={0}
-          depthFactor={1}
           pulseSpeed={3}
           particleShape="capsule"
           fieldStrength={10}
         />
       </div>
       <div className="fixed inset-0 -z-5 bg-white/60 backdrop-blur-[1px]" />
-      {/*Display of video */}
-      {showIntro && (
-        <div
-          className="fixed inset-0 z-50 bg-black flex items-center justify-center"
-          style={{ opacity: fadingOut ? 0 : 1, transition: "opacity 2s ease" }}
-        >
-          <video
-            ref={videoRef}
-            src={introVideo}
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          {/* Skip button for the intro video */}
-          <button
-            onClick={() => {
-              sessionStorage.setItem("introSeen", "true");
-              setFadingOut(true);
-              setTimeout(() => setShowIntro(false), 2000);
-            }}
-            className="absolute bottom-8 right-8 font-[family-name:var(--font-mono)] font-bold text-xl text-white/40 bg-gray-800 hover:text-white/80 transition-colors tracking-widest uppercase"
-          >
-            Skip →
-          </button>
-        </div>
-      )}
-    
+
     <main className="min-h-screen pt-14 flex items-center">
       <div className="max-w-5xl mx-auto px-8 py-32 w-full">
         <div className="animate-fade-up-delay-1">

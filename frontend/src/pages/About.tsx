@@ -1,4 +1,4 @@
-import profile from "../assets/profile.jpg";
+import profile from "../assets/profile.webp";
 import Galaxy from "../components/Galaxy";
 
 //facts about me

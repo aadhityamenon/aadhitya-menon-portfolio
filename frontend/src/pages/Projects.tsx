@@ -1,9 +1,8 @@
 import { useState } from "react";
-import heyblue from "../assets/heyblue.png";
-import mentoraconnect from "../assets/mentora.png";
-import pneumodetect from "../assets/pneumodetect.png";
+import heyblue from "../assets/heyblue.webp";
+import mentoraconnect from "../assets/mentora.webp";
+import pneumodetect from "../assets/pneumodetect.webp";
 import ElectricBorder from '../components/ElectricBorder';
-import LiquidEther from '../components/LiquidEther';
 
 /* Project type */
 type Project = {
@@ -67,29 +66,6 @@ export default function Projects() {
   return (
     <main className="min-h-screen pt-14">
       <div className="relative w-full min-h-screen overflow-hidden">
-        <div className="fixed inset-0 -z-10">
-          {/* Liquid ether effect */}
-          <LiquidEther
-            colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]}
-            mouseForce={20}
-            cursorSize={100}
-            isViscous
-            viscous={30}
-            iterationsViscous={32}
-            iterationsPoisson={32}
-            resolution={0.5}
-            isBounce={false}
-            autoDemo
-            autoSpeed={0.5}
-            autoIntensity={2.2}
-            takeoverDuration={0.25}
-            autoResumeDelay={3000}
-            autoRampDuration={0.6}
-            color0="#5227FF"
-            color1="#FF9FFC"
-            color2="#B19EEF"
-          />
-        </div>
         <div className="relative z-10 max-w-5xl mx-auto px-8 py-24">
           {/* Header */}
           <div className="border-b border-stone-200 pb-8 mb-16">

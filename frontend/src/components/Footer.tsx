@@ -21,7 +21,7 @@ export default function Footer() {
     <footer className="border-t border-stone-200 mt-24">
       <div className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
         {/* Footer copyright */}
-        <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400">
+        <span className="font-[family-name:var(--font-mono)] text-xs text-stone-500">
           © {new Date().getFullYear()} Aadhitya Menon
         </span>
         <ul className="flex items-center gap-6">
@@ -32,7 +32,7 @@ export default function Footer() {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="font-[family-name:var(--font-mono)] text-xs text-stone-400 hover:text-stone-900 transition-colors"
+                className="font-[family-name:var(--font-mono)] text-xs text-stone-500 hover:text-stone-900 transition-colors"
               >
                 {label}
               </a>

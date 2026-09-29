@@ -261,7 +261,11 @@ export default function Galaxy({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId;
+    let animateId = null;
+
+    const prefersReducedMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function update(t) {
       animateId = requestAnimationFrame(update);
@@ -282,8 +286,31 @@ export default function Galaxy({
 
       renderer.render({ scene: mesh });
     }
-    animateId = requestAnimationFrame(update);
+
+    function stopLoop() {
+      if (animateId !== null) {
+        cancelAnimationFrame(animateId);
+        animateId = null;
+      }
+    }
+
+    function startLoop() {
+      if (animateId === null && !document.hidden && !prefersReducedMotion) {
+        animateId = requestAnimationFrame(update);
+      }
+    }
+
+    startLoop();
     ctn.appendChild(gl.canvas);
+
+    function handleVisibility() {
+      if (document.hidden) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility);
 
     function handleMouseMove(e) {
       const rect = ctn.getBoundingClientRect();
@@ -303,7 +330,8 @@ export default function Galaxy({
     }
 
     return () => {
-      cancelAnimationFrame(animateId);
+      stopLoop();
+      document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('resize', resize);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
